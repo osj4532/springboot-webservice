@@ -7,9 +7,11 @@
             <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>
             {{#userName}}
                 Logged in as : <span id="user">{{userName}}</span>
+                <!-- /logout은 스프링 시큐리티에서 기본적으로 제공하는 로그아웃 URL이다. -->
                 <a href="/logout" class="btn btn-info active" role="button">Logout</a>
             {{/userName}}
             {{^userName}}
+                <!-- /oauth2/authorization/google 스프링 시큐리티에서 기본적으로 제공하는 로그인 URL이다. -->
                 <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
             {{/userName}}
         </div>

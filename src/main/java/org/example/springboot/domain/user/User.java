@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class User extends BaseTimeEntity {
+public class User extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,6 +24,8 @@ public class User extends BaseTimeEntity {
     @Column
     private String picture;
 
+    //JPA로 데이터베이스로 저장할 때 Enum 값을 어떤 형태로 저장할지를 결정, 기본 int
+    //int면 DB에서 무슨 코드인지 알수 없기 때문에 String으로 저장될수 있게한다.
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
@@ -44,6 +46,6 @@ public class User extends BaseTimeEntity {
     }
 
     public String getRoleKey(){
-        return this.role.getKey();
+        return role.getKey();
     }
 }
