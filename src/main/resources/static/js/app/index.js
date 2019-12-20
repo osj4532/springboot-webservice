@@ -29,8 +29,8 @@ var main = {
         }).done(() => {
             alert('글이 등록되었습니다.');
             window.location.href = '/';
-        }).fail(() => {
-            alert(JSON.stringify(data));
+        }).fail((error) => {
+            alert(JSON.stringify(error));
         })
     },
     update : function(){

@@ -1,7 +1,10 @@
 package org.example.springboot.web;
 
 import lombok.RequiredArgsConstructor;
+import org.example.springboot.config.auth.LoginUser;
+import org.example.springboot.config.auth.dto.SessionUser;
 import org.example.springboot.domain.posts.Posts;
+import org.example.springboot.domain.user.User;
 import org.example.springboot.service.posts.PostsService;
 import org.example.springboot.web.dto.PostsListResponseDto;
 import org.example.springboot.web.dto.PostsResponseDto;
@@ -17,18 +20,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
+
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
     private final PostsService postsService;
+    private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model, @PageableDefault(page=0, size=5, sort={"id"}, direction = Sort.Direction.DESC) Pageable pageable){
+    public String index(Model model, @PageableDefault(page=0, size=5, sort={"id"}, direction = Sort.Direction.DESC) Pageable pageable,
+                        @LoginUser SessionUser user){
         Page<PostsListResponseDto> posts = postsService.findAllPaging(pageable);
         int maxSize = posts.getSize()/5;
         int prev = pageable.getPageNumber() - 1 < 0 ? 0 : pageable.getPageNumber() - 1;
         int next = pageable.getPageNumber() + 1 > maxSize ? maxSize : pageable.getPageNumber() + 1;
 
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
         model.addAttribute("posts", posts);
         model.addAttribute("prev", prev);
         model.addAttribute("next", next);
