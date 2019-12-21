@@ -49,8 +49,10 @@ dependencies {
     //oauth2
     compile('org.springframework.boot:spring-boot-starter-oauth2-client')
 
+    //session을 jdbc에 등록
     compile('org.springframework.session:spring-session-jdbc')
 
     //test
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.security:spring-security-test')
 }
