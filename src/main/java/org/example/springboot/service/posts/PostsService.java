@@ -62,4 +62,12 @@ public class PostsService {
 
         postsRepository.delete(posts);
     }
+
+    @Transactional
+    public void updateReadCount(Long id){
+        Posts posts = postsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
+
+        posts.updateReadCount();
+    }
 }

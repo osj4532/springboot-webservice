@@ -25,6 +25,7 @@
                 <th>게시글번호</th>
                 <th>제목</th>
                 <th>작성자</th>
+                <th>조회수</th>
                 <th>최종수정일</th>
             </tr>
         </thead>
@@ -34,6 +35,7 @@
                 <td>{{id}}</td>
                 <td><a href="/posts/update/{{id}}">{{title}}</a></td>
                 <td>{{author}}</td>
+                <td>{{readCount}}</td>
                 <td>{{modifiedDate}}</td>
             </tr>
         {{/posts.content}}

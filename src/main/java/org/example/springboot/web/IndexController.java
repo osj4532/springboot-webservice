@@ -38,13 +38,15 @@ public class IndexController {
     }
 
     @GetMapping("/posts/save")
-    public String postsSave(){
+    public String postsSave(@LoginUser SessionUser user, Model model){
+        model.addAttribute("userName", user.getName());
         return "posts-save";
     }
 
     @GetMapping("/posts/update/{id}")
     public String postsUpdate(@PathVariable Long id, Model model){
         PostsResponseDto requestDto = postsService.findById(id);
+        postsService.updateReadCount(id);
         model.addAttribute("post", requestDto);
 
         return "posts-update";
