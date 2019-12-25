@@ -39,6 +39,8 @@ dependencies {
     //h2 database
     compile('com.h2database:h2')
 
+    compile('org.mariadb.jdbc:mariadb-java-client')
+
     //lombok
     compileOnly('org.projectlombok:lombok')
     annotationProcessor('org.projectlombok:lombok')
