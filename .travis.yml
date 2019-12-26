@@ -1,5 +1,4 @@
 language: java
-
 jdk:
   - openjdk8
 
@@ -13,33 +12,6 @@ cache:
     - '$HOME/.gradle'
 
 script: "./gradlew clean build"
-
-before_deploy:
-  - zip -r springboot2-webservice *
-  - mkdir -p deploy
-  - mv springboot2-webservice.zip deploy/springboot2-webservice.zip
-
-deploy:
-  - provider: s3
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
-    bucket: osj-springboot-webservice-build
-    region: ap-northeast-2
-    cleanup: true
-    acl: private
-    local_dir: deploy
-    wait-until-deployed: true
-
-  - provider: codedeploy
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
-    bucket: osj-springboot-webservice-build
-    key: springboot2-webservice.zip
-    bundle_type: zip
-    application: springboot2-webservice
-    deployment_group: springboot2-webservice-group
-    region: ap-northeast-2
-    wait-until-deployed: true
 
 notifications:
   email:
