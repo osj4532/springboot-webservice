@@ -45,6 +45,11 @@ public class User extends BaseTimeEntity{
         return this;
     }
 
+    public User guestToUser(){
+        this.role = Role.USER;
+        return this;
+    }
+
     public String getRoleKey(){
         return role.getKey();
     }
